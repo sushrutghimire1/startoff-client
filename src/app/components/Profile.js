@@ -1,69 +1,122 @@
 import React, { Component } from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
+
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
-import { Button, Container } from "reactstrap";
-import { Alert } from "react-bootstrap";
-
+import FooterBar from "./FooterBar";
+import Navfooter from "./footer";
+import Profile from "./profileComponents/Profile";
+import Orders from "./profileComponents/Orders";
+import Address from "./profileComponents/Address";
+import Feedback from "./profileComponents/Feedback";
+import Gift from "./profileComponents/Gift";
+import Faq from "./profileComponents/Faq";
 import AuthenticationService from "../services/AuthenticationService";
+import "../Styles/ProfileConsum.css";
 
-class Profile extends Component {
+class ProfileConsum extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: undefined };
+    this.state = { user: undefined, page: "profile" };
   }
-
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
     this.setState({ user: user });
   }
+  state = {
+    page: "profile",
+  };
+  handleClick = (e) => {
+    this.setState({
+      page: e,
+    });
+  };
+
+  Sidebar = () => {
+    return (
+      <ListGroup>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("orders");
+          }}
+        >
+          My Orders
+        </ListGroupItem>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("profile");
+          }}
+        >
+          Profile Information
+        </ListGroupItem>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("address");
+          }}
+        >
+          Manage Address
+        </ListGroupItem>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("feedback");
+          }}
+        >
+          Feedbacks and Insights
+        </ListGroupItem>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("gift");
+          }}
+        >
+          Gift Coupons
+        </ListGroupItem>
+        <ListGroupItem
+          onClick={() => {
+            this.handleClick("faq");
+          }}
+        >
+          FAQs
+        </ListGroupItem>
+      </ListGroup>
+    );
+  };
+
+  page = () => {
+    if (this.state.page === "profile") {
+      return <Profile />;
+    } else if (this.state.page === "orders") {
+      return <Orders />;
+    } else if (this.state.page === "address") {
+      return <Address />;
+    } else if (this.state.page === "feedback") {
+      return <Feedback />;
+    } else if (this.state.page === "gift") {
+      return <Gift />;
+    } else if (this.state.page === "faq") {
+      return <Faq />;
+    }
+  };
 
   render() {
-    let userInfo = "";
     const user = this.state.user;
-
-    // login
-    if (user && user.jwt) {
-      let roles = "";
-
-      user.authorities.forEach((authority) => {
-        roles = roles + authority + " ";
-      });
-
-      userInfo = (
-        <div style={{ marginTop: "20px" }}>
-          <Alert variant="info">
-            <h2>User Info</h2>
-            <ul>
-              <li>Username: {user.username}</li>
-              <li>Access Token: {user.jwt}</li>
-              <li>Authorities: {roles}</li>
-            </ul>
-          </Alert>
+    // for test case using or and true in below if condition
+    if ((user && user.jwt) || true) {
+      return (
+        <div>
+          <Navbar />
+          <div className="ProfileConsum my-3">
+            <div className="row">
+              <div className="col-md-3">{this.Sidebar()}</div>
+              <div className="col-md-9">{this.page()}</div>
+            </div>
+          </div>
+          <FooterBar />
+          <Navfooter />
         </div>
       );
     } else {
-      // not login
-      userInfo = (
-        <div style={{ marginTop: "20px" }}>
-          <Alert variant="primary">
-            <h2>Profile Component</h2>
-            <Button color="success">
-              <Link to="/signin">
-                <span style={{ color: "white" }}>Login</span>
-              </Link>
-            </Button>
-          </Alert>
-        </div>
-      );
+      return <div>Display ERROR page</div>;
     }
-
-    return (
-      <div>
-        <Navbar />
-        <Container fluid>{userInfo}</Container>
-      </div>
-    );
   }
 }
 
-export default Profile;
+export default ProfileConsum;

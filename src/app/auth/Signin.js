@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import AuthenticationService from "../services/AuthenticationService";
 
-import "../../App.css";
+import "../Styles/signIn.css";
 
 class Signin extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Signin extends Component {
 
     AuthenticationService.signin(this.state.username, this.state.password).then(
       () => {
-        this.props.history.push("/profile");
+        this.props.history.push("/home");
       },
       (error) => {
         console.log("Login fail: error = { " + error.toString() + " }");
@@ -42,7 +42,7 @@ class Signin extends Component {
     return (
       <div className="container-fluid signIn">
         <div className="row my-5 ">
-          <div className="col-lg-7 col-md-2 col-sm-2 text-light d-sm-none d-md-block">
+          <div className="col-lg-7 col-md-8 col-sm-2 text-light d-sm-none d-md-block">
             <nav className="navbar "></nav>
             edit background image from styles/signin.css in .signIn class,
             opacity of login box is 0.5, edit the background to div.row
@@ -114,7 +114,7 @@ class Signin extends Component {
             </div>
             <div className="col-lg-3 col-md-2"></div>
           </div>
-          <div className="col-lg-1 col-md-2 col-sm-2"></div>
+          <div className="col-lg-1 col-md-8 col-sm-2"></div>
         </div>
       </div>
     );

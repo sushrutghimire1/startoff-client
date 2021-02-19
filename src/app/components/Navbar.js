@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import TextField from "@material-ui/core/TextField";
 import NavbarDropdown from "./NavbarDropdown";
+import "../Styles/navigationbar.css";
 
 const Navbar = (props) => {
+  const [search, setSearch] = useState();
+  const searchChangeHandler = (e) => {
+    setSearch(e.target.value);
+  };
+  const searchHandler = (e) => {
+    e.preventDefault();
+    console.log(search);
+  };
   return (
-    <div>
-      <nav className="navbar navbar-expand-sm navbar-light bg-light px-1 py-2">
+    <div className="navigationbar">
+      <nav className="navbar navbar-expand-sm px-1 py-2">
         <div>
-          <NavLink className="navbar-brand" to="/">
-            <span className="display-4">Start Off</span>
+          <NavLink className="navbar-brand mx-5" to="/">
+            <span className="display-6">Start Off</span>
           </NavLink>
         </div>
 
@@ -24,15 +34,26 @@ const Navbar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link active" to="/">
-                Home
+          <div className="d-flex justify-content-right w-75">
+            <input className="form-control" onChange={searchChangeHandler} />
+            <button className="btn btn-outline-info" onClick={searchHandler}>
+              Search
+            </button>
+          </div>
+          <ul className="navbar-nav me-auto px-5">
+            <li className="nav-item px-2">
+              <NavLink to="/orders" className="nav-link">
+                Orders
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/">
-                Link
+            <li className="nav-item px-2">
+              <NavLink to="/Contact" className="nav-link">
+                Contact
+              </NavLink>
+            </li>
+            <li className="nav-item px-2">
+              <NavLink className="" to="/cart">
+                <i className="fas fa-shopping-cart fa-2x"></i>
               </NavLink>
             </li>
           </ul>

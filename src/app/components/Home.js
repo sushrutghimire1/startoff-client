@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
-import { Button, Container } from "reactstrap";
+import { Container } from "reactstrap";
+import Carousel from "./homeComponents/carousel";
+import ItemCatalog from "./homeComponents/itemCatalog";
+import Coupons from "./homeComponents/Coupons";
+import FeaturedProductCatalog from "./homeComponents/FeaturedProductCatalog";
+import FooterBar from "./FooterBar";
+import Navfooter from "./footer";
+import "../Styles/Home.css";
 
 class Home extends Component {
   constructor(props) {
@@ -12,18 +18,16 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home">
         <Navbar />
+        <Carousel />
         <Container fluid>
-          <div style={{ marginTop: "20px" }}>
-            <h2>Reactjs JWT Authentication Application</h2>
-            <Button color="success">
-              <Link to="/signin">
-                <span style={{ color: "white" }}>Login</span>
-              </Link>
-            </Button>
-          </div>
+          <ItemCatalog />
+          <Coupons />
+          <FeaturedProductCatalog />
         </Container>
+        <FooterBar />
+        <Navfooter />
       </div>
     );
   }
