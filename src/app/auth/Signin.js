@@ -93,6 +93,7 @@ class Signin extends Component {
                       <button
                         type="submit"
                         className="btn form-control btn-primary align-self-center"
+                        onClick={this.doLogin}
                       >
                         LOGIN
                       </button>
