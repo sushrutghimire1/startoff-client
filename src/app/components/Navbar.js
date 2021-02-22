@@ -34,12 +34,13 @@ const Navbar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <div className="d-flex justify-content-right w-75">
+          <div className="d-flex justify-content-right w-50">
             <input className="form-control" onChange={searchChangeHandler} />
             <button className="btn btn-outline-info" onClick={searchHandler}>
               Search
             </button>
           </div>
+          <div className="w-25"></div>
           <ul className="navbar-nav me-auto px-5">
             <li className="nav-item px-2">
               <NavLink to="/orders" className="nav-link">

@@ -144,14 +144,17 @@ class cart extends Component {
         {
           code: "SUMMER",
           discount: "50%",
+          expdate: "11/12/2021",
         },
         {
           code: "AUTUMN",
           discount: "40%",
+          expdate: "11/12/2021",
         },
         {
           code: "WINTER",
           discount: "30%",
+          expdate: "11/12/2021",
         },
       ],
       promoCode: "",

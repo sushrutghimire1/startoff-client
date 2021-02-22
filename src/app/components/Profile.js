@@ -98,6 +98,7 @@ class ProfileConsum extends Component {
 
   render() {
     const user = this.state.user;
+    console.log(this.state);
     // for test case using or and true in below if condition
     if ((user && user.jwt) || true) {
       return (

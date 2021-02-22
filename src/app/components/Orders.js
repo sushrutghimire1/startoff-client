@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
 import Navbar from "./Navbar";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
@@ -18,6 +23,8 @@ class Orders extends Component {
           total: 100,
           status: "delivered",
           statusDate: "10/11/2021",
+          rating: 5,
+          feedback: "",
         },
         {
           orderId: 2,
@@ -29,6 +36,8 @@ class Orders extends Component {
           total: 200,
           status: "shipping",
           statusDate: "08/11/2021",
+          rating: 5,
+          feedback: "",
         },
         {
           orderId: 3,
@@ -40,6 +49,8 @@ class Orders extends Component {
           total: 300,
           status: "ordered",
           statusDate: "03/11/2021",
+          rating: 5,
+          feedback: "",
         },
         {
           orderId: 4,
@@ -51,6 +62,8 @@ class Orders extends Component {
           total: 400,
           status: "canceled",
           statusDate: "03/11/2021",
+          rating: 5,
+          feedback: "",
         },
       ],
     };
@@ -82,41 +95,58 @@ class Orders extends Component {
       );
     }
   }
+  usestyle = {
+    width: "100%",
+  };
   render() {
     return (
       <div className="Orders bg-light">
         <Navbar />
         <div className="container ">
           {this.state.order.map((items, index) => (
-            <div
-              className="my-3 p-3"
-              style={{
-                background: "rgb(80, 205, 255)",
-                boxShadow: "2px 2px 7px 1px #1c6ea4",
-              }}
-              key={items.orderId}
-            >
-              <strong>Order ID: {items.orderId}</strong>
-              <div className="row text-center">
-                <div className="col-md-2">{items.image}</div>
-                <div className="col-md-4">
-                  <h1 style={{ color: "rgb(255, 64, 0)" }}>
-                    {items.productName}
-                  </h1>
-                  Quantity: {items.quantity}
-                  <br />
-                  Seller: {items.seller}
-                </div>
-                <div className="col-md-2">
-                  <h3>Rs. {items.total}</h3>
-                </div>
-                <div className="col-md-4">
-                  {this.status(items.status)}
-                  <br />
-                  {items.statusDate}
-                </div>
-              </div>
-            </div>
+            <Accordion>
+              <AccordionSummary
+                aria-controls="panel1a-content"
+                id={items.orderId}
+              >
+                <Typography style={this.usestyle}>
+                  <div
+                    className="my-3 p-3"
+                    style={{
+                      background: "rgb(80, 205, 255)",
+                      boxShadow: "2px 2px 7px 1px #1c6ea4",
+                    }}
+                    key={items.orderId}
+                  >
+                    <strong>Order ID: {items.orderId}</strong>
+                    <div className="row text-center">
+                      <div className="col-md-2">{items.image}</div>
+                      <div className="col-md-4">
+                        <h1 style={{ color: "rgb(255, 64, 0)" }}>
+                          {items.productName}
+                        </h1>
+                        Quantity: {items.quantity}
+                        <br />
+                        Seller: {items.seller}
+                      </div>
+                      <div className="col-md-2">
+                        <h3>Rs. {items.total}</h3>
+                      </div>
+                      <div className="col-md-4">
+                        {this.status(items.status)}
+                        <br />
+                        {items.statusDate}
+                      </div>
+                    </div>
+                  </div>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  review system star giving system, a feedback input text
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           ))}
         </div>
         <FooterBar />

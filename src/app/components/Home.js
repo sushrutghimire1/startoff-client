@@ -8,28 +8,37 @@ import FeaturedProductCatalog from "./homeComponents/FeaturedProductCatalog";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
 import "../Styles/Home.css";
-
+import AuthenticationService from "../services/AuthenticationService";
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = { user: undefined, page: "home" };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const user = AuthenticationService.getCurrentUser();
+    this.setState({ user: user });
+  }
 
   render() {
-    return (
-      <div className="home">
-        <Navbar />
-        <Carousel />
-        <Container fluid>
-          <ItemCatalog />
-          <Coupons />
-          <FeaturedProductCatalog />
-        </Container>
-        <FooterBar />
-        <Navfooter />
-      </div>
-    );
+    const user = this.state.user;
+    if ((user && user.jwt) || true) {
+      return (
+        <div className="home">
+          <Navbar />
+          <Carousel />
+          <Container fluid>
+            <ItemCatalog />
+            <Coupons />
+            <FeaturedProductCatalog />
+          </Container>
+          <FooterBar />
+          <Navfooter />
+        </div>
+      );
+    } else {
+      return <div>Display ERROR page</div>;
+    }
   }
 }
 
