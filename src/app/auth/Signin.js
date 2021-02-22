@@ -92,7 +92,7 @@ class Signin extends Component {
                     <center>
                       <button
                         type="submit"
-                        className="btn form-control btn-primary align-self-center"
+                        className="btn form-control btn-success align-self-center"
                         onClick={this.doLogin}
                       >
                         LOGIN
@@ -101,6 +101,15 @@ class Signin extends Component {
                       {this.state.error && (
                         <div className="bg-danger mt-2">{this.state.error}</div>
                       )}
+                      <button
+                        type="submit"
+                        className="btn form-control btn-primary align-self-center mt-3"
+                        onClick={() => {
+                          this.props.history.push("/signup");
+                        }}
+                      >
+                        SIGNUP
+                      </button>
                     </center>
                   </div>
                   <div className="form-group mb-5">
