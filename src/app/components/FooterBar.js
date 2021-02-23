@@ -5,33 +5,33 @@ import "../Styles/FooterBar.css";
 const FooterBar = () => {
   return (
     <footer>
-      <div class="footerBar">
-        <div class="row">
+      <div className="footerBar">
+        <div className="row">
           <ul>
             <li>
               <Link to="/">
-                <i class="fab fa-facebook"></i>
+                <i className="fab fa-facebook"></i>
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i class="fab fa-instagram"></i>
+                <i className="fab fa-instagram"></i>
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i class="fab fa-youtube"></i>
+                <i className="fab fa-youtube"></i>
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i class="fab fa-twitter"></i>
+                <i className="fab fa-twitter"></i>
               </Link>
             </li>
           </ul>
         </div>
 
-        <div class="row">
+        <div className="row">
           <ul>
             <li>
               <Link to="/">Contact us </Link>
@@ -51,7 +51,7 @@ const FooterBar = () => {
           </ul>
         </div>
 
-        <div class="row">
+        <div className="row">
           STARTOFF Copyright © 2021 StartOff - All rights reserved || Designed
           By: Naman
         </div>

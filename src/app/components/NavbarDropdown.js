@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import AuthenticationService from "../services/AuthenticationService";
 import {
   Dropdown,
   DropdownToggle,
@@ -12,7 +13,8 @@ const NavSignUp = (props) => {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const usrname = () => {
-    return <span>Username need to edit</span>;
+    const user = AuthenticationService.getCurrentUser();
+    return <span>{user.username}</span>;
   };
   return (
     <div className="mr-5">

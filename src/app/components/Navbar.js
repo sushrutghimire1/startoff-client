@@ -17,7 +17,7 @@ const Navbar = (props) => {
     <div className="navigationbar">
       <nav className="navbar navbar-expand-sm px-1 py-2">
         <div>
-          <NavLink className="navbar-brand mx-5" to="/">
+          <NavLink className="navbar-brand mx-5" to="/home">
             <span className="display-6">Start Off</span>
           </NavLink>
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -8,7 +9,7 @@ class Profile extends Component {
     super(props);
     this.state = {
       FirstName: "Naman",
-      Username: "ReactJS: EditableText",
+      Username: "duttanaman1s",
       LastName: "Dutta",
       Email: "duttanaman1@gmail.com",
       Mobile: "7339210265",
@@ -34,25 +35,129 @@ class Profile extends Component {
       color: "rgb(255, 98, 0)",
     },
   };
+  componentDidUpdate() {
+    //console.log(this.state);
+  }
   render() {
     return (
-      <div className="Profile">
+      <div className="Profile m-3">
         <div className="row mb-3">
           <h1>Personal Information</h1>
         </div>
         <Divider variant="middle" />
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Paper style={this.useStyles.paper}>
-              <form noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Standard" />
-              </form>
-            </Paper>
+        <form noValidate autoComplete="off">
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={12}></Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="FirstName"
+                  label="First Name"
+                  defaultValue={this.state.FirstName}
+                  onChange={(e) => {
+                    this.setState({ FirstName: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="LastName"
+                  label="Last Name"
+                  defaultValue={this.state.LastName}
+                  onChange={(e) => {
+                    this.setState({ LastName: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="Mobile"
+                  label="Mobile"
+                  defaultValue={this.state.Mobile}
+                  onChange={(e) => {
+                    this.setState({ Mobile: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="Username"
+                  label="Username"
+                  defaultValue={this.state.Username}
+                  onChange={(e) => {
+                    this.setState({ Username: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="Email"
+                  label="Email"
+                  defaultValue={this.state.Email}
+                  onChange={(e) => {
+                    this.setState({ Email: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="Password"
+                  label="Password"
+                  defaultValue={this.state.Password}
+                  onChange={(e) => {
+                    this.setState({ Password: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="DoB"
+                  label="DoB"
+                  defaultValue={this.state.DoB}
+                  onChange={(e) => {
+                    this.setState({ DoB: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="City"
+                  label="City"
+                  defaultValue={this.state.City}
+                  onChange={(e) => {
+                    this.setState({ City: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="Country"
+                  label="Country"
+                  defaultValue={this.state.Country}
+                  onChange={(e) => {
+                    this.setState({ Country: e.target.value });
+                  }}
+                />
+              </Paper>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper style={this.useStyles.paper}>xs=12 sm=6</Paper>
-          </Grid>
-        </Grid>
+        </form>
       </div>
     );
   }

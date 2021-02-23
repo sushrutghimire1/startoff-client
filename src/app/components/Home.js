@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
+import { Redirect } from "react-router-dom";
 import { Container } from "reactstrap";
 import Carousel from "./homeComponents/carousel";
 import ItemCatalog from "./homeComponents/itemCatalog";
@@ -18,6 +19,7 @@ class Home extends Component {
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
     this.setState({ user: user });
+    console.log(this.state);
   }
 
   render() {
@@ -37,7 +39,11 @@ class Home extends Component {
         </div>
       );
     } else {
-      return <div>Display ERROR page</div>;
+      return (
+        <div>
+          <Redirect to="/signin" />
+        </div>
+      );
     }
   }
 }

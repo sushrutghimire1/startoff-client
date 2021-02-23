@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-
+import { Redirect } from "react-router-dom";
 import Navbar from "./Navbar";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
 import Profile from "./profileComponents/Profile";
 import Orders from "./profileComponents/Orders";
 import Address from "./profileComponents/Address";
-import Feedback from "./profileComponents/Feedback";
+// import Feedback from "./profileComponents/Feedback";
 import Gift from "./profileComponents/Gift";
 import Faq from "./profileComponents/Faq";
 import AuthenticationService from "../services/AuthenticationService";
@@ -55,13 +55,13 @@ class ProfileConsum extends Component {
         >
           Manage Address
         </ListGroupItem>
-        <ListGroupItem
+        {/* <ListGroupItem
           onClick={() => {
             this.handleClick("feedback");
           }}
         >
           Feedbacks and Insights
-        </ListGroupItem>
+        </ListGroupItem> */}
         <ListGroupItem
           onClick={() => {
             this.handleClick("gift");
@@ -87,8 +87,8 @@ class ProfileConsum extends Component {
       return <Orders />;
     } else if (this.state.page === "address") {
       return <Address />;
-    } else if (this.state.page === "feedback") {
-      return <Feedback />;
+      // } else if (this.state.page === "feedback") {
+      //   return <Feedback />;
     } else if (this.state.page === "gift") {
       return <Gift />;
     } else if (this.state.page === "faq") {
@@ -115,7 +115,11 @@ class ProfileConsum extends Component {
         </div>
       );
     } else {
-      return <div>Display ERROR page</div>;
+      return (
+        <div>
+          <Redirect to="/signin" />
+        </div>
+      );
     }
   }
 }
