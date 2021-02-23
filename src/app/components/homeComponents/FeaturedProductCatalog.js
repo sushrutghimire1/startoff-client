@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../../Styles/FeaturedProductCatalog.css";
 class FeaturedProductCatalog extends Component {
   constructor(props) {
@@ -79,6 +80,11 @@ class FeaturedProductCatalog extends Component {
                   }}
                 >
                   <i className="fa fa-cart-arrow-down"></i> Add to cart
+                </span>
+                <span className="product-grid__btn product-grid__view">
+                  <Link to={"/product/" + item.id}>
+                    <i className="fa fa-eye"></i> View more
+                  </Link>
                 </span>
               </div>
             </div>
