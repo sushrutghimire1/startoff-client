@@ -10,13 +10,8 @@ class SignUp extends Component {
     super(props);
     this.state = {
       username: "",
-      email: "",
       password: "",
       repassword: "",
-      phone: "",
-      dob: "",
-      city: "",
-      country: "",
       role: "consumer",
       check: false,
     };
@@ -26,26 +21,16 @@ class SignUp extends Component {
     console.log(this.state);
     if (this.state.password === this.state.repassword && this.state.check) {
       console.log("form submitted, redirect to");
-      Authentication.register(
-        this.state.firstname,
-        this.state.lastname,
-        this.state.username,
-        this.state.email,
-        this.state.password
-      ).then(
+      Authentication.register(this.state.username, this.state.password).then(
         (response) => {
-          this.setState({
-            message: response.data.message,
-            successful: true,
-          });
+          Authentication.signin(this.state.username, this.state.password).then(
+            (response) => {
+              this.props.history.push("/fillDetails");
+            }
+          );
         },
         (error) => {
           console.log("Fail! Error = " + error.toString());
-
-          this.setState({
-            successful: false,
-            message: error.toString(),
-          });
         }
       );
     } else {
@@ -148,18 +133,6 @@ class SignUp extends Component {
                         onChange={this.changeHandler}
                       />
                     </div>
-                    <div className="col-md-6 form-group">
-                      <label className="form-control-label">
-                        <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">EMAIL</span>
-                      </label>
-                      <input
-                        type="email"
-                        className="username form-control "
-                        name="email"
-                        onChange={this.changeHandler}
-                      />
-                    </div>
                     <div className=" col-md-6 form-group">
                       <label className="form-control-label">
                         <i className="fa fa-lock fa-2x"></i>
@@ -181,54 +154,6 @@ class SignUp extends Component {
                         type="password"
                         className="password form-control "
                         name="repassword"
-                        onChange={this.changeHandler}
-                      />
-                    </div>
-                    <div className="col-md-6 form-group">
-                      <label className="form-control-label">
-                        <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">PHONE</span>
-                      </label>
-                      <input
-                        type="tel"
-                        className="username form-control "
-                        name="phone"
-                        onChange={this.changeHandler}
-                      />
-                    </div>
-                    <div className="col-md-6 form-group">
-                      <label className="form-control-label">
-                        <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">Date of Birth</span>
-                      </label>
-                      <input
-                        type="date"
-                        className="username form-control "
-                        name="dob"
-                        onChange={this.changeHandler}
-                      />
-                    </div>
-                    <div className="col-md-6 form-group">
-                      <label className="form-control-label">
-                        <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">CITY</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="username form-control "
-                        name="city"
-                        onChange={this.changeHandler}
-                      />
-                    </div>
-                    <div className="col-md-6 form-group">
-                      <label className="form-control-label">
-                        <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">COUNTRY</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="username form-control "
-                        name="country"
                         onChange={this.changeHandler}
                       />
                     </div>

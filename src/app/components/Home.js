@@ -13,13 +13,15 @@ import AuthenticationService from "../services/AuthenticationService";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: undefined, page: "home" };
+    const user = AuthenticationService.getCurrentUser();
+    this.state = { user: user, page: "home" };
   }
 
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
-    this.setState({ user: user });
+    this.setState({ user: user.id });
     console.log(this.state);
+    console.log(JSON.parse(localStorage.getItem("user")).id);
   }
 
   render() {

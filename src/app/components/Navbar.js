@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 // import TextField from "@material-ui/core/TextField";
 import NavbarDropdown from "./NavbarDropdown";
 import "../Styles/navigationbar.css";
@@ -9,9 +9,12 @@ const Navbar = (props) => {
   const searchChangeHandler = (e) => {
     setSearch(e.target.value);
   };
+
   const searchHandler = (e) => {
     e.preventDefault();
     console.log(search);
+    let path = "/search/" + search;
+    props.history.push(path);
   };
   return (
     <div className="navigationbar">
@@ -64,4 +67,4 @@ const Navbar = (props) => {
     </div>
   );
 };
-export default Navbar;
+export default withRouter(Navbar);

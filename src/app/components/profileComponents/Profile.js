@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import UserInfoService from "../../services/UserInfoService";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -7,6 +7,9 @@ import TextField from "@material-ui/core/TextField";
 class Profile extends Component {
   constructor(props) {
     super(props);
+    UserInfoService.getUserInfo().then((response) => {
+      console.log(response);
+    });
     this.state = {
       FirstName: "Naman",
       Username: "duttanaman1s",
@@ -14,7 +17,6 @@ class Profile extends Component {
       Email: "duttanaman1@gmail.com",
       Mobile: "7339210265",
       DoB: "18/11/1999",
-      Password: "naman",
       City: "Kathmandu",
       Country: "City",
     };
@@ -35,9 +37,7 @@ class Profile extends Component {
       color: "rgb(255, 98, 0)",
     },
   };
-  componentDidUpdate() {
-    //console.log(this.state);
-  }
+  componentDidUpdate() {}
   render() {
     return (
       <div className="Profile m-3">
@@ -104,18 +104,6 @@ class Profile extends Component {
                   defaultValue={this.state.Email}
                   onChange={(e) => {
                     this.setState({ Email: e.target.value });
-                  }}
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={4} sm={4}>
-              <Paper style={this.useStyles.paper}>
-                <TextField
-                  id="Password"
-                  label="Password"
-                  defaultValue={this.state.Password}
-                  onChange={(e) => {
-                    this.setState({ Password: e.target.value });
                   }}
                 />
               </Paper>

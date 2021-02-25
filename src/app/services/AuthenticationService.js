@@ -23,14 +23,14 @@ class AuthenticationService {
     localStorage.removeItem("user");
   }
 
-  register = async (firstname, lastname, username, email, password) => {
-    return axios.post("https://startoff-main.herokuapp.com/api/auth/signup", {
-      firstname,
-      lastname,
-      username,
-      email,
-      password,
-    });
+  register = async (username, password) => {
+    return axios.post(
+      "http://startoff-main.herokuapp.com/client/registrations/create-client",
+      {
+        username,
+        password,
+      }
+    );
   };
 
   getCurrentUser() {

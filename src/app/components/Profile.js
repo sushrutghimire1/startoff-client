@@ -16,7 +16,8 @@ import "../Styles/ProfileConsum.css";
 class ProfileConsum extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: undefined, page: "profile" };
+    const user = AuthenticationService.getCurrentUser();
+    this.state = { user: user, page: "profile" };
   }
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
