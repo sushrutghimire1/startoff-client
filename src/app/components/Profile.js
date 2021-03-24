@@ -16,16 +16,11 @@ import "../Styles/ProfileConsum.css";
 class ProfileConsum extends Component {
   constructor(props) {
     super(props);
-    const user = AuthenticationService.getCurrentUser();
-    this.state = { user: user, page: "profile" };
+    this.state = {
+      page: "profile",
+    };
   }
-  componentDidMount() {
-    const user = AuthenticationService.getCurrentUser();
-    this.setState({ user: user });
-  }
-  state = {
-    page: "profile",
-  };
+
   handleClick = (e) => {
     this.setState({
       page: e,
@@ -101,27 +96,20 @@ class ProfileConsum extends Component {
     const user = this.state.user;
     console.log(this.state);
     // for test case using or and true in below if condition
-    if ((user && user.jwt) || true) {
-      return (
-        <div>
-          <Navbar />
-          <div className="ProfileConsum my-3">
-            <div className="row">
-              <div className="col-md-3">{this.Sidebar()}</div>
-              <div className="col-md-9">{this.page()}</div>
-            </div>
+
+    return (
+      <div>
+        <Navbar />
+        <div className="ProfileConsum my-3">
+          <div className="row">
+            <div className="col-md-3">{this.Sidebar()}</div>
+            <div className="col-md-9">{this.page()}</div>
           </div>
-          <FooterBar />
-          <Navfooter />
         </div>
-      );
-    } else {
-      return (
-        <div>
-          <Redirect to="/signin" />
-        </div>
-      );
-    }
+        <FooterBar />
+        <Navfooter />
+      </div>
+    );
   }
 }
 

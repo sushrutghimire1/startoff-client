@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Collapse, CardBody, Card } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Address = () => {
   var addr = {
@@ -113,9 +114,11 @@ const Address = () => {
           <form onSubmit={handleSubmit}>
             <CardBody className="row">
               <div className="col-md-3 my-3">
-                <button className="btn btn-primary">
-                  Use My Current Location
-                </button>
+                <Link to="/mapComponent">
+                  <button className="btn btn-primary">
+                    Set Google Maps Location
+                  </button>
+                </Link>
               </div>
               <div className="col-md-8 my-3"></div>
 

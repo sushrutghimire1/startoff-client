@@ -1,0 +1,97 @@
+consumer:{
+	id:"string",
+	FirstName:"string",
+	LastName:"string",
+	Email:"String",
+	DOB:"string",
+	Age:Int,
+	phone:Int,
+	Country:"String",
+	State:""
+	PinCode:Int,
+	lat:Double,
+	lng:Double,
+	//latitude and longitude taken from google maps api
+	//dev.to/jessicabetts/how-to-use-google-maps-api-and-react-js-26c2
+	DOJ:"string",
+	//Date of Joining
+	totAmt:Double,
+	//Total Amount Spent
+	QntProd:Int,
+	//Quantity of Products bought
+}
+
+login:{
+	token:"String",
+	//token generated during login.
+	email:"string",
+	password:"string",
+	roles:"string",
+	UserId:"String",
+	dateTime:"String"
+}
+
+Shipping Address:{
+	UserId:"string",
+	Name:"String",
+	Mob:Int,
+	pincode:Int,
+	locality:"String optional",
+	city:"String",
+	state:"String",
+	country:"String",
+	landmark:"String Optional",
+	tag:"String (Home, Work, Other)"
+}
+
+PromoCodes:{
+	id:Int,
+	code:"String",
+	Discount:Double,
+	Expiry:"Sting Date",
+	Products:{
+		id:"String" || Int,
+		name:"string",
+		price:Double,
+		Seller:{
+			id:"String",
+			name:"string",
+			mob:Int
+		}
+	}
+}
+
+transactions || orders:{
+	
+	id:"String" || Int,
+	productId:"String" || Int,
+	productName:"String",
+	prodImage:"",
+	Quantity:Int,
+	Seller:{
+		id:"String",
+		name:"String",
+		mob:Int,
+	},
+	total:Double,
+	promoUse:boolean,
+	promoCode:"String"
+	status:"String" (delivered,shipping,ordered,canceled),
+	statusDate:"String",
+	rating:Int,
+	Feedback:"String",
+	fake:boolean
+	//detection of fake comments. Not that hard.
+	//https://scoredata.com/how-to-detect-fake-online-reviews-using-machine-learning-2/
+}
+
+cart:{
+	products:{
+		prodId:Int,
+		prodName:"String",
+		prodImg:"",
+		price:double,
+		quantity:Int,
+		total:double
+	}
+}

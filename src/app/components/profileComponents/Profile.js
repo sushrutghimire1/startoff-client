@@ -7,9 +7,7 @@ import TextField from "@material-ui/core/TextField";
 class Profile extends Component {
   constructor(props) {
     super(props);
-    UserInfoService.getUserInfo().then((response) => {
-      console.log(response);
-    });
+
     this.state = {
       FirstName: "Naman",
       Username: "duttanaman1s",

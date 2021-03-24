@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
+import MapComponent from "./app/mapComponent";
+
 import Home from "./app/components/Home";
 import Profile from "./app/components/Profile";
 import cart from "./app/components/cart";
@@ -35,19 +37,17 @@ class App extends Component {
           <Route path="/career" component={Career} />
 
           <Route path="/home" exact={true} component={Home} />
-          {AuthenticationService.getCurrentUser() && (
-            <Route path="/cart" exact={true} component={cart} />
-          )}
-          {AuthenticationService.getCurrentUser() && (
-            <Route path="/profile" exact={true} component={Profile} />
-          )}
 
-          {AuthenticationService.getCurrentUser() && (
-            <Route path="/orders" exact={true} component={Orders} />
-          )}
+          <Route path="/cart" exact={true} component={cart} />
+
+          <Route path="/profile" exact={true} component={Profile} />
+
+          <Route path="/orders" exact={true} component={Orders} />
+
           <Route path="/product/:product_id" component={Product} />
 
           <Route path="/search/:value" component={Search} />
+          <Route path="/MapComponent" component={MapComponent} />
         </Switch>
       </Router>
     );

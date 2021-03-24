@@ -1,0 +1,5 @@
+google maps: https://dev.to/jessicabetts/how-to-use-google-maps-api-and-react-js-26c2
+google maps: youtube.com/watch?v=WZcxJGmLbSo
+Node JWT: https://medium.com/@rempire230/user-authentication-with-jwt-using-node-express-and-mongo-db-altas-f0256232abb1
+geoLoaction: pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
+React State: pluralsight.com/guides/fetching-data-updating-state-react-class

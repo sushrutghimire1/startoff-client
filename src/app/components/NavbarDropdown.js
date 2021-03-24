@@ -14,7 +14,7 @@ const NavSignUp = (props) => {
 
   const usrname = () => {
     const user = AuthenticationService.getCurrentUser();
-    return <span>{user.username}</span>;
+    return <span>{user ? user.id : "Guest"}</span>;
   };
   return (
     <div className="mr-5">

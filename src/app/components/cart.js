@@ -213,54 +213,45 @@ class cart extends Component {
   };
 
   render() {
-    const user = this.state.user;
-    if ((user && user.jwt) || true) {
-      const products = this.state.products;
-      return (
-        <div>
-          <Navbar />
-          <div className="cart mb-5">
-            <Header products={products} />
-            {products.length > 0 ? (
-              <div>
-                <ProductList
-                  products={products}
-                  onChangeProductQuantity={this.onChangeProductQuantity}
-                  onRemoveProduct={this.onRemoveProduct}
-                />
+    const products = this.state.products;
+    return (
+      <div>
+        <Navbar />
+        <div className="cart mb-5">
+          <Header products={products} />
+          {products.length > 0 ? (
+            <div>
+              <ProductList
+                products={products}
+                onChangeProductQuantity={this.onChangeProductQuantity}
+                onRemoveProduct={this.onRemoveProduct}
+              />
 
-                <Summary
-                  products={products}
-                  discount={this.state.discount}
-                  tax={this.state.tax}
-                  onEnterPromoCode={this.onEnterPromoCode}
-                  checkPromoCode={this.checkPromoCode}
-                />
-              </div>
-            ) : (
-              <div className="empty-product">
-                <h3>There are no products in your cart.</h3>
-                <button
-                  onClick={() => {
-                    this.props.history.push("/Home/Consumer");
-                  }}
-                >
-                  Shopping now
-                </button>
-              </div>
-            )}
-          </div>
-          <FooterBar />
-          <Navfooter />
+              <Summary
+                products={products}
+                discount={this.state.discount}
+                tax={this.state.tax}
+                onEnterPromoCode={this.onEnterPromoCode}
+                checkPromoCode={this.checkPromoCode}
+              />
+            </div>
+          ) : (
+            <div className="empty-product">
+              <h3>There are no products in your cart.</h3>
+              <button
+                onClick={() => {
+                  this.props.history.push("/Home/Consumer");
+                }}
+              >
+                Shopping now
+              </button>
+            </div>
+          )}
         </div>
-      );
-    } else {
-      return (
-        <div>
-          <Redirect to="/signin" />
-        </div>
-      );
-    }
+        <FooterBar />
+        <Navfooter />
+      </div>
+    );
   }
 }
 
