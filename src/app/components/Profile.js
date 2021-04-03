@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import axios from "axios";
 import Navbar from "./Navbar";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
@@ -10,7 +10,6 @@ import Address from "./profileComponents/Address";
 // import Feedback from "./profileComponents/Feedback";
 import Gift from "./profileComponents/Gift";
 import Faq from "./profileComponents/Faq";
-import AuthenticationService from "../services/AuthenticationService";
 import "../Styles/ProfileConsum.css";
 
 class ProfileConsum extends Component {
@@ -18,6 +17,8 @@ class ProfileConsum extends Component {
     super(props);
     this.state = {
       page: "profile",
+      address: [],
+      loading: true,
     };
   }
 
@@ -75,14 +76,26 @@ class ProfileConsum extends Component {
       </ListGroup>
     );
   };
-
+  componentDidMount() {
+    // fetch("http://localhost:4000/profile/address")
+    //   .then((res) => {
+    //     res = res.json();
+    //   })
+    //   .then((res) => {
+    //     this.setState({ address: res, loading: false });
+    //   });
+    axios.get("http://localhost:4000/profile/address").then((res) => {
+      console.log(res.data.address);
+      this.setState({ address: res.data.address, loading: false });
+    });
+  }
   page = () => {
     if (this.state.page === "profile") {
       return <Profile />;
     } else if (this.state.page === "orders") {
       return <Orders />;
     } else if (this.state.page === "address") {
-      return <Address />;
+      return <Address address={this.state.address} />;
       // } else if (this.state.page === "feedback") {
       //   return <Feedback />;
     } else if (this.state.page === "gift") {
@@ -93,10 +106,6 @@ class ProfileConsum extends Component {
   };
 
   render() {
-    const user = this.state.user;
-    console.log(this.state);
-    // for test case using or and true in below if condition
-
     return (
       <div>
         <Navbar />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 // import TextField from "@material-ui/core/TextField";
 import NavbarDropdown from "./NavbarDropdown";
@@ -9,13 +9,17 @@ const Navbar = (props) => {
   const searchChangeHandler = (e) => {
     setSearch(e.target.value);
   };
-
+  const [login, setLogin] = useState();
   const searchHandler = (e) => {
     e.preventDefault();
     console.log(search);
     let path = "/search/" + search;
     props.history.push(path);
   };
+  useEffect(() => {
+    setLogin(props.login);
+  });
+
   return (
     <div className="navigationbar">
       <nav className="navbar navbar-expand-sm px-1 py-2">
@@ -61,7 +65,7 @@ const Navbar = (props) => {
               </NavLink>
             </li>
           </ul>
-          <NavbarDropdown />
+          <NavbarDropdown login={login} />
         </div>
       </nav>
     </div>

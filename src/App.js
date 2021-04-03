@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import MapComponent from "./app/mapComponent";
+import Temp from "./app/temp";
 
 import Home from "./app/components/Home";
 import Profile from "./app/components/Profile";
@@ -36,7 +37,7 @@ class App extends Component {
 
           <Route path="/career" component={Career} />
 
-          <Route path="/home" exact={true} component={Home} />
+          <Route path="/home" component={Home} />
 
           <Route path="/cart" exact={true} component={cart} />
 
@@ -47,7 +48,8 @@ class App extends Component {
           <Route path="/product/:product_id" component={Product} />
 
           <Route path="/search/:value" component={Search} />
-          <Route path="/MapComponent" component={MapComponent} />
+          <Route path="/MapComponent/:value" component={MapComponent} />
+          <Route path="/Temp" component={Temp} />
         </Switch>
       </Router>
     );
