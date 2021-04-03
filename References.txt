@@ -3,3 +3,7 @@ google maps: youtube.com/watch?v=WZcxJGmLbSo
 Node JWT: https://medium.com/@rempire230/user-authentication-with-jwt-using-node-express-and-mongo-db-altas-f0256232abb1
 geoLoaction: pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
 React State: pluralsight.com/guides/fetching-data-updating-state-react-class
+React + Express RESTAPI: https://www.youtube.com/watch?v=fnpmR6Q5lEc
+
+Collaborative Filtering: towardsdatascience.com/intro-to-recommender-system-collaborative-filtering-64a238194a26
+Collaborative Filtering npm package: https://www.npmjs.com/package/collaborative-filter
