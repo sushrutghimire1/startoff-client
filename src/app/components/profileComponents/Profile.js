@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import UserInfoService from "../../services/UserInfoService";
+import axios from "axios";
+// import UserInfoService from "../../services/UserInfoService";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -7,21 +8,23 @@ import TextField from "@material-ui/core/TextField";
 class Profile extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      FirstName: "Naman",
-      Username: "duttanaman1s",
-      LastName: "Dutta",
-      Email: "duttanaman1@gmail.com",
-      Mobile: "7339210265",
-      DoB: "18/11/1999",
-      City: "Kathmandu",
-      Country: "City",
+      res: {},
     };
   }
-  // componentDidMount(){
-  //     //fetch detiails.
-  // }
+  componentDidMount() {
+    axios.get("http://localhost:4000/profile/userinfo").then((res) => {
+      this.setState({ res: res.data });
+    });
+    // fetch("http://localhost:4000/profile/userinfo")
+    //   .then((res) => (res = res.json()))
+    //   .then((res) => {
+    //     this.setState({ res });
+    //     console.log(res);
+    //     console.log(this.state);
+    //     console.log(this.state.res.FirstName);
+    //   });
+  }
   useStyles = {
     root: {
       flexGrow: 1,
@@ -35,7 +38,7 @@ class Profile extends Component {
       color: "rgb(255, 98, 0)",
     },
   };
-  componentDidUpdate() {}
+
   render() {
     return (
       <div className="Profile m-3">
@@ -50,10 +53,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="FirstName"
-                  label="First Name"
-                  defaultValue={this.state.FirstName}
+                  label={this.state.res.FirstName}
+                  value={this.state.res.FirstName}
                   onChange={(e) => {
-                    this.setState({ FirstName: e.target.value });
+                    this.setState({ res: { FirstName: e.target.value } });
                   }}
                 />
               </Paper>
@@ -62,10 +65,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="LastName"
-                  label="Last Name"
-                  defaultValue={this.state.LastName}
+                  label={this.state.res.LastName}
+                  value={this.state.res.LastName}
                   onChange={(e) => {
-                    this.setState({ LastName: e.target.value });
+                    this.setState({ res: { LastName: e.target.value } });
                   }}
                 />
               </Paper>
@@ -74,10 +77,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="Mobile"
-                  label="Mobile"
-                  defaultValue={this.state.Mobile}
+                  label={this.state.res.Mobile}
+                  value={this.state.res.Mobile}
                   onChange={(e) => {
-                    this.setState({ Mobile: e.target.value });
+                    this.setState({ res: { Mobile: e.target.value } });
                   }}
                 />
               </Paper>
@@ -86,10 +89,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="Username"
-                  label="Username"
-                  defaultValue={this.state.Username}
+                  label={this.state.res.Username}
+                  value={this.state.res.Username}
                   onChange={(e) => {
-                    this.setState({ Username: e.target.value });
+                    this.setState({ res: { Username: e.target.value } });
                   }}
                 />
               </Paper>
@@ -98,10 +101,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="Email"
-                  label="Email"
-                  defaultValue={this.state.Email}
+                  label={this.state.res.Email}
+                  value={this.state.res.Email}
                   onChange={(e) => {
-                    this.setState({ Email: e.target.value });
+                    this.setState({ res: { Email: e.target.value } });
                   }}
                 />
               </Paper>
@@ -110,10 +113,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="DoB"
-                  label="DoB"
-                  defaultValue={this.state.DoB}
+                  label={this.state.res.DoB}
+                  value={this.state.res.DoB}
                   onChange={(e) => {
-                    this.setState({ DoB: e.target.value });
+                    this.setState({ res: { DoB: e.target.value } });
                   }}
                 />
               </Paper>
@@ -122,10 +125,10 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="City"
-                  label="City"
-                  defaultValue={this.state.City}
+                  label={this.state.res.City}
+                  value={this.state.res.City}
                   onChange={(e) => {
-                    this.setState({ City: e.target.value });
+                    this.setState({ res: { City: e.target.value } });
                   }}
                 />
               </Paper>
@@ -134,10 +137,22 @@ class Profile extends Component {
               <Paper style={this.useStyles.paper}>
                 <TextField
                   id="Country"
-                  label="Country"
-                  defaultValue={this.state.Country}
+                  label={this.state.res.Country}
+                  value={this.state.res.Country}
                   onChange={(e) => {
-                    this.setState({ Country: e.target.value });
+                    this.setState({ res: { Country: e.target.value } });
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <Paper style={this.useStyles.paper}>
+                <TextField
+                  id="PinCode"
+                  label={this.state.res.PinCode}
+                  value={this.state.res.PinCode}
+                  onChange={(e) => {
+                    this.setState({ res: { PinCode: e.target.value } });
                   }}
                 />
               </Paper>

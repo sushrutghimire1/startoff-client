@@ -1,81 +1,43 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 
 import "../Styles/signIn.css";
-
-import Authentication from "../services/AuthenticationService";
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
       phone: "",
       dob: "",
       city: "",
       country: "",
+      lastName: "",
+      firstName: "",
+      pincode: "",
     };
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    //call service here
-    this.props.history.push("/home");
+    await axios
+      .post("http://localhost:4000/auth/fillDetails", {
+        phone: this.state.phone,
+        dob: this.state.dob,
+        city: this.state.city,
+        country: this.state.country,
+        lastName: this.state.lastName,
+        firstName: this.state.firstName,
+        pincode: this.state.pincode,
+      })
+      .then((res) => {
+        var userid = res.data.userid;
+        this.props.history.push("/home/" + userid);
+      });
   };
   changeHandler = (e) => {
-    switch (e.target.name) {
-      case "username":
-        this.setState({
-          username: e.target.value,
-        });
-        break;
-      case "country":
-        this.setState({
-          country: e.target.value,
-        });
-        break;
-      case "password":
-        this.setState({
-          password: e.target.value,
-        });
-        break;
-      case "repassword":
-        this.setState({
-          repassword: e.target.value,
-        });
-        break;
-      case "phone":
-        this.setState({
-          phone: e.target.value,
-        });
-        break;
-      case "dob":
-        this.setState({
-          dob: e.target.value,
-        });
-        break;
-      case "city":
-        this.setState({
-          city: e.target.value,
-        });
-        break;
-      case "role":
-        this.setState({
-          role: e.target.value,
-        });
-        break;
-      case "email":
-        this.setState({
-          email: e.target.value,
-        });
-        break;
-      case "check":
-        this.setState({
-          check: !this.state.check,
-        });
-        break;
-      default:
-        break;
-    }
+    var nam = e.target.name;
+    var val = e.target.val;
+    this.setState({ [nam]: val });
   };
   handleClick = (e) => {
     e.preventDefault();
@@ -108,15 +70,28 @@ class SignUp extends Component {
                     <div className="col-md-6 form-group">
                       <label className="form-control-label">
                         <i className="fa fa-user fa-2x"></i>
-                        <span className="h6">EMAIL</span>
+                        <span className="h6">First Name</span>
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         className="username form-control "
-                        name="email"
+                        name="firstName"
                         onChange={this.changeHandler}
                       />
                     </div>
+                    <div className="col-md-6 form-group">
+                      <label className="form-control-label">
+                        <i className="fa fa-user fa-2x"></i>
+                        <span className="h6">Last Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="username form-control "
+                        name="lastName"
+                        onChange={this.changeHandler}
+                      />
+                    </div>
+
                     <div className="col-md-6 form-group">
                       <label className="form-control-label">
                         <i className="fa fa-user fa-2x"></i>
@@ -165,6 +140,19 @@ class SignUp extends Component {
                         onChange={this.changeHandler}
                       />
                     </div>
+                    <div className="col-md-6 form-group">
+                      <label className="form-control-label">
+                        <i className="fa fa-user fa-2x"></i>
+                        <span className="h6">pincode</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="username form-control "
+                        name="pincode"
+                        onChange={this.changeHandler}
+                      />
+                    </div>
+
                     <div className="form-group">
                       <center>
                         <input

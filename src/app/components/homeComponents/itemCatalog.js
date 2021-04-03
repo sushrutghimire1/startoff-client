@@ -29,53 +29,13 @@ const ItemCatalog = (props) => {
     addCart([...cart, itemValue]);
   };
   useEffect(() => {
-    console.log(cart);
+    setItem(props.item);
   });
 
   //use setItem for component.Mount
-  const [item, setItem] = useState([
-    {
-      id: 1,
-      title: "Genuine Leather iPhone 12 Case",
-      price: 1.99,
-      discount: 94,
-      soldno: 1465,
-      desp: "product description",
-      img: "product.jpg",
-      merchant: "sellername",
-    },
-    {
-      id: 2,
-      title: "Genuine Leather iPhone 12 Case",
-      price: 2.99,
-      discount: 94,
-      soldno: 1465,
-      desp: "product description",
-      img: "product.jpg",
-      merchant: "sellername",
-    },
-    {
-      id: 3,
-      title: "Genuine Leather iPhone 12 Case",
-      price: 3.99,
-      discount: 94,
-      soldno: 1465,
-      desp: "product description",
-      img: "product.jpg",
-      merchant: "sellername",
-    },
-    {
-      id: 4,
-      title: "Genuine Leather iPhone 12 Case",
-      price: 4.99,
-      discount: 94,
-      soldno: 1465,
-      desp: "product description",
-      img: "product.jpg",
-      merchant: "sellername",
-    },
-  ]);
-  console.log(item);
+  const [item, setItem] = useState([]);
+
+  //console.log(item);
   return (
     <div className="itemCatalog">
       <div className="row py-5">
@@ -85,7 +45,7 @@ const ItemCatalog = (props) => {
           </center>
         </div>
         {item.map((item, index) => (
-          <div className="col-lg-3">
+          <div className="col-lg-3" key={item.id}>
             <div className="card product-card mx-auto">
               <div className="card-header text-center">
                 <h1 className="product-title">{item.title}</h1>

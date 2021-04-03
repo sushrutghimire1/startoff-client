@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Collapse, CardBody, Card } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Address = () => {
+const Address = (props) => {
   var addr = {
     addressId: "",
     name: "",
@@ -15,11 +15,29 @@ const Address = () => {
     landmark: "",
     mobAlt: "",
     tag: "",
+    lat: "",
+    lng: "",
   };
 
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState([]);
-  const toggle = () => setIsOpen(!isOpen);
+
+  const [latlng, setLatLng] = useState({
+    lat: null,
+    lng: null,
+  });
+  const toggle = () => {
+    setIsOpen(!isOpen);
+    navigator.geolocation.getCurrentPosition(function (position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      setLatLng({ lat: latitude, lng: longitude });
+      addr.lat = latitude;
+      addr.lng = longitude;
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  };
 
   const changeHandler = (event) => {
     switch (event.target.name) {
@@ -56,6 +74,7 @@ const Address = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    //set new Address here
     setAddress(address.concat(addr));
     toggle();
   };
@@ -67,11 +86,17 @@ const Address = () => {
     setAddress(filterAddress);
   };
   useEffect(() => {
-    console.log(address);
+    if (props.address) {
+      setAddress(props.address);
+    }
+    //console.log(address);
   });
   const ListGroup = address.map((item) => {
     return (
-      <div className="list-group-item list-group-item-action ">
+      <div
+        className="list-group-item list-group-item-action "
+        key={item.addressId}
+      >
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">{item.name}</h5>
           <small
@@ -95,7 +120,7 @@ const Address = () => {
       </div>
     );
   });
-
+  const handleMaps = (e) => {};
   return (
     <div className="ProfileConsum-Address">
       <h1>Manage Address</h1>
@@ -114,8 +139,8 @@ const Address = () => {
           <form onSubmit={handleSubmit}>
             <CardBody className="row">
               <div className="col-md-3 my-3">
-                <Link to="/mapComponent">
-                  <button className="btn btn-primary">
+                <Link to={"/mapComponent/" + latlng.lat + "-" + latlng.lng}>
+                  <button className="btn btn-primary" onClick={handleMaps}>
                     Set Google Maps Location
                   </button>
                 </Link>

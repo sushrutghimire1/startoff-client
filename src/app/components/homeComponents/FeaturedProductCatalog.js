@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "../../Styles/FeaturedProductCatalog.css";
 class FeaturedProductCatalog extends Component {
@@ -6,6 +7,7 @@ class FeaturedProductCatalog extends Component {
     super(props);
     this.state = {
       addCart: [],
+      FeaturedItems: props.item,
     };
   }
   addCartHandler = (item) => {
@@ -13,52 +15,21 @@ class FeaturedProductCatalog extends Component {
     temp.push(item);
     this.setState(temp);
   };
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/home/featuredProductCatalog")
+      .then((res) => {
+        this.setState({ FeaturedItems: res.data });
+        //console.log("featuredProductCatalog", res.data);
+      });
+  }
+  // componentDidMount() {
+  //   var items = this.props.item;
+  //   console.log(this.props);
+  //   this.setState({ FeaturedItems: items });
+  // }
   render() {
-    var FeaturedItems = [
-      {
-        id: 1,
-        img: "img1.jpg",
-        title: "product item 1",
-        price: 2.3369,
-        desp: "description",
-      },
-      {
-        id: 2,
-        img: "img2.jpg",
-        title: "product item 2",
-        price: 2.3369,
-        desp: "description",
-      },
-      {
-        id: 3,
-        img: "img3.jpg",
-        title: "product item 3",
-        price: 2.3369,
-        desp: "description",
-      },
-      {
-        id: 4,
-        img: "img4.jpg",
-        title: "product item 4",
-        price: 2.3369,
-        desp: "description",
-      },
-      {
-        id: 5,
-        img: "img5.jpg",
-        title: "product item 5",
-        price: 2.3369,
-        desp: "description",
-      },
-      {
-        id: 6,
-        img: "img6.jpg",
-        title: "product item 6",
-        price: 2.3369,
-        desp: "description",
-      },
-    ];
-    const displayFeaturedItem = FeaturedItems.map((item) => {
+    const displayFeaturedItem = this.state.FeaturedItems.map((item) => {
       return (
         <div className="product-grid__product-wrapper" key={item.id}>
           <div className="product-grid__product">

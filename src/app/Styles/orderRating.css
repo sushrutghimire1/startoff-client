@@ -1,0 +1,106 @@
+.orderRating a {
+  color: tomato;
+  text-decoration: none;
+}
+
+.orderRating a:hover {
+  color: #2196f3;
+}
+
+/*----------------------------
+BIG HEADER
+------------------------------*/
+.orderRating .big-header {
+  padding: 2em 0;
+  position: relative;
+  text-align: center;
+}
+
+.orderRating .big-header:after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: #eee;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 0;
+}
+
+.orderRating .big-header h1 {
+  font-size: 2.75em;
+  font-weight: 300;
+  margin-bottom: 0.2em;
+}
+
+.orderRating .big-header p {
+  font-size: 16px;
+}
+
+.orderRating .big-header p.sub {
+  font-size: 12px;
+  color: #9999;
+}
+
+.orderRating .note {
+  margin: 20px 0;
+  padding: 10px;
+  color: #888;
+  background-color: #fefefe;
+  font-size: 12px;
+  border-left: 5px solid tomato;
+}
+
+/* Widget Container */
+.orderRating #widget {
+  position: relative;
+  padding: 20px 0;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-width: 0;
+}
+
+/*----------------------------
+Rating Star Widget Style
+-----------------------------*/
+.orderRating .rating-stars {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.orderRating .rating-stars .star {
+  display: inline-block;
+  padding: 0 5px;
+  font-size: 2.5em;
+  color: #ccc;
+
+  transition: 0.1s all ease-in-out;
+  transform: scale(0.8);
+}
+.orderRating .rating-stars .star:hover,
+.orderRating .rating-stars .star.semi-active {
+  color: #ffd73e;
+  transform: scale(1);
+}
+
+.orderRating .rating-stars .star.active {
+  color: #ff9800;
+  transform: scale(1);
+}
+
+/* Rating Message */
+.orderRating .after-rating-message {
+  display: none;
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px 20px;
+  background-color: #f7f7f7;
+  opacity: 0;
+  transition: 0.2s all ease-in-out;
+}
+
+.orderRating .after-rating-message.show {
+  display: block;
+  opacity: 1;
+}

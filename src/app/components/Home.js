@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Navbar from "./Navbar";
 import { Redirect } from "react-router-dom";
 import { Container } from "reactstrap";
@@ -14,27 +15,46 @@ class Home extends Component {
   constructor(props) {
     super(props);
     //const user = AuthenticationService.getCurrentUser();
-    fetch("http://localhost:4000/api")
-      .then((res) => res.text())
-      .then((res) => this.state({ user: res, page: "home" }));
+    this.state = {
+      login: {},
+      itemCatalog: [],
+      coupons: [],
+      featuredProductCatalog: [],
+    };
   }
-
   componentDidMount() {
-    // const user = AuthenticationService.getCurrentUser();
-    // this.setState({ user: user.id });
-    console.log(this.state);
-    //console.log(JSON.parse(localStorage.getItem("user")).id);
+    axios.get("http://localhost:4000/home/loginInfo").then((res) => {
+      this.setState({ login: res.data });
+      //console.log("loginInfo", res.data);
+    });
+
+    axios.get("http://localhost:4000/home/coupon").then((res) => {
+      this.setState({ coupons: res.data });
+      //console.log("coupon", res.data);
+    });
+
+    axios.get("http://localhost:4000/home/itemCatalog").then((res) => {
+      this.setState({ itemCatalog: res.data });
+      //console.log("itemCatalog", res.data);
+    });
+    // axios
+    //   .get("http://localhost:4000/home/featuredProductCatalog")
+    //   .then((res) => {
+    //     this.setState({ featuredProductCatalog: res.data });
+    //     //console.log("featuredProductCatalog", res.data);
+    //   });
+    //FeaturedProductCatalog is a class component while others are functional component
   }
 
   render() {
     return (
       <div className="home">
-        <Navbar />
+        <Navbar login={this.state.login} />
         <Carousel />
         <Container fluid>
-          <ItemCatalog />
-          <Coupons />
-          <FeaturedProductCatalog />
+          <ItemCatalog item={this.state.itemCatalog} />
+          <Coupons coupon={this.state.coupons} />
+          <FeaturedProductCatalog item={this.state.featuredProductCatalog} />
         </Container>
         <FooterBar />
         <Navfooter />

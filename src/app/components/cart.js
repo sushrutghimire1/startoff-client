@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Navbar from "./Navbar";
 import Navfooter from "./footer";
 import { Link, Redirect } from "react-router-dom";
@@ -123,40 +124,9 @@ class cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [
-        {
-          image: "https://via.placeholder.com/200x150",
-          name: "PRODUCT ITEM NUMBER 1",
-          description: "Description for product item number 1",
-          price: 5.99,
-          quantity: 2,
-        },
-        {
-          image: "https://via.placeholder.com/200x150",
-          name: "PRODUCT ITEM NUMBER 2",
-          description: "Description for product item number 1",
-          price: 9.99,
-          quantity: 1,
-        },
-      ],
+      products: [],
+      promotions: [],
       tax: 5,
-      promotions: [
-        {
-          code: "SUMMER",
-          discount: "50%",
-          expdate: "11/12/2021",
-        },
-        {
-          code: "AUTUMN",
-          discount: "40%",
-          expdate: "11/12/2021",
-        },
-        {
-          code: "WINTER",
-          discount: "30%",
-          expdate: "11/12/2021",
-        },
-      ],
       promoCode: "",
       discount: 0,
       itemCount: 0,
@@ -165,9 +135,15 @@ class cart extends Component {
     };
   }
   componentDidMount() {
-    const user = AuthenticationService.getCurrentUser();
-    this.setState({ user: user });
-    console.log(this.state);
+    axios.get("http://localhost:4000/cart/showProducts").then((res) => {
+      this.setState({
+        products: res.data.products,
+        promotions: res.data.promotions,
+      });
+    });
+    axios.get("http://localhost:4000/home/loginInfo").then((res) => {
+      this.setState({ user: res.data.userid });
+    });
   }
   onChangeProductQuantity = (index, event) => {
     const products = this.state.products;

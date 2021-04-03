@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
+import axios from "axios";
 
 import "../Styles/signIn.css";
-
-import Authentication from "../services/AuthenticationService";
 
 class SignUp extends Component {
   constructor(props) {
@@ -13,85 +12,34 @@ class SignUp extends Component {
       password: "",
       repassword: "",
       role: "consumer",
+      email: "",
       check: false,
     };
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state);
     if (this.state.password === this.state.repassword && this.state.check) {
-      console.log("form submitted, redirect to");
-      Authentication.register(this.state.username, this.state.password).then(
-        (response) => {
-          Authentication.signin(this.state.username, this.state.password).then(
-            (response) => {
-              this.props.history.push("/fillDetails");
-            }
-          );
-        },
-        (error) => {
-          console.log("Fail! Error = " + error.toString());
-        }
-      );
+      await axios
+        .post("http://localhost:4000/auth/signUp", {
+          username: this.state.username,
+          password: this.state.password,
+          role: this.state.role,
+          email: this.state.email,
+        })
+        .then((res) => {
+          if (res.data.success) {
+            localStorage.setItem("user", JSON.stringify(res.data));
+            this.props.history.push("fillDetails");
+          }
+        });
     } else {
       console.log("error in form");
     }
   };
   changeHandler = (e) => {
-    switch (e.target.name) {
-      case "username":
-        this.setState({
-          username: e.target.value,
-        });
-        break;
-      case "country":
-        this.setState({
-          country: e.target.value,
-        });
-        break;
-      case "password":
-        this.setState({
-          password: e.target.value,
-        });
-        break;
-      case "repassword":
-        this.setState({
-          repassword: e.target.value,
-        });
-        break;
-      case "phone":
-        this.setState({
-          phone: e.target.value,
-        });
-        break;
-      case "dob":
-        this.setState({
-          dob: e.target.value,
-        });
-        break;
-      case "city":
-        this.setState({
-          city: e.target.value,
-        });
-        break;
-      case "role":
-        this.setState({
-          role: e.target.value,
-        });
-        break;
-      case "email":
-        this.setState({
-          email: e.target.value,
-        });
-        break;
-      case "check":
-        this.setState({
-          check: !this.state.check,
-        });
-        break;
-      default:
-        break;
-    }
+    let nam = e.target.name;
+    let val = e.target.value;
+    this.setState({ [nam]: val });
   };
   handleClick = (e) => {
     e.preventDefault();
@@ -120,7 +68,7 @@ class SignUp extends Component {
               <div className="col-lg-12 login-form">
                 <div className="col-lg-12 login-form">
                   {/* form starting here */}
-                  <form className="row m-2 px-5" onSubmit={this.handleSubmit}>
+                  <form className="row m-2 px-5">
                     <div className="col-md-6 form-group">
                       <label className="form-control-label">
                         <i className="fa fa-user fa-2x"></i>
@@ -130,6 +78,18 @@ class SignUp extends Component {
                         type="text"
                         className="username form-control"
                         name="username"
+                        onChange={this.changeHandler}
+                      />
+                    </div>
+                    <div className="col-md-6 form-group">
+                      <label className="form-control-label">
+                        <i className="fa fa-user fa-2x"></i>
+                        <span className="h6">Email</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="email form-control"
+                        name="email"
                         onChange={this.changeHandler}
                       />
                     </div>
@@ -218,6 +178,7 @@ class SignUp extends Component {
                           type="submit"
                           value="SignUp"
                           className="btn btn-success align-self-center form-control"
+                          onClick={this.handleSubmit}
                         />
                       </center>
                     </div>

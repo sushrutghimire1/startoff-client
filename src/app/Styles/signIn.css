@@ -41,7 +41,8 @@ body {
   text-align: left;
 }
 
-.signIn .username {
+.signIn .username,
+.signIn .email {
   background: rgb(26, 34, 38, 0.3);
   border: none;
   border-bottom: 0.125rem solid #0db8de;
