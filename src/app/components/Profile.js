@@ -77,14 +77,9 @@ class ProfileConsum extends Component {
     );
   };
   componentDidMount() {
-    // fetch("http://localhost:4000/profile/address")
-    //   .then((res) => {
-    //     res = res.json();
-    //   })
-    //   .then((res) => {
-    //     this.setState({ address: res, loading: false });
-    //   });
-    axios.get("http://localhost:4000/profile/address").then((res) => {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+
+    axios.get("http://localhost:4000/profile/address/" + userid).then((res) => {
       console.log(res.data.address);
       this.setState({ address: res.data.address, loading: false });
     });

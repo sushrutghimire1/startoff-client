@@ -16,8 +16,9 @@ class FeaturedProductCatalog extends Component {
     this.setState(temp);
   };
   componentDidMount() {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
     axios
-      .get("http://localhost:4000/home/featuredProductCatalog")
+      .get("http://localhost:4000/home/featuredProductCatalog/" + userid)
       .then((res) => {
         this.setState({ FeaturedItems: res.data });
         //console.log("featuredProductCatalog", res.data);

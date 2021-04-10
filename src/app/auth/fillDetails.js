@@ -19,6 +19,7 @@ class SignUp extends Component {
   }
   handleSubmit = async (e) => {
     e.preventDefault();
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
     await axios
       .post("http://localhost:4000/auth/fillDetails", {
         phone: this.state.phone,
@@ -28,6 +29,7 @@ class SignUp extends Component {
         lastName: this.state.lastName,
         firstName: this.state.firstName,
         pincode: this.state.pincode,
+        userid: userid,
       })
       .then((res) => {
         var userid = res.data.userid;

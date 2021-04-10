@@ -4,6 +4,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import Navbar from "./Navbar";
+import Slider from "@material-ui/core/Slider";
 import OrderRating from "./orderRating";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
@@ -14,6 +15,8 @@ class Orders extends Component {
     super(props);
     this.state = {
       order: [],
+      userid: "",
+      newfeedback: "",
     };
   }
   status(e) {
@@ -46,28 +49,69 @@ class Orders extends Component {
   usestyle = {
     width: "100%",
   };
-  // componentDidMount() {
-  //   fetch("http://localhost:4000/orders/consumer")
-  //     .then((res) => {
-  //       res = res.json();
-  //     })
-  //     .then((res) => {
-  //       this.setState({ res });
-  //     })
-  //     .catch((error) => console.error(error));
-  // }
-  // async componentDidMount() {
-  //   const url = "http://localhost:4000/orders/consumer";
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   this.setState({ data });
-  // }
+  ratingsMarks = [
+    {
+      label: 0,
+      value: 0,
+    },
+    {
+      label: 1,
+      value: 1,
+    },
+    {
+      label: 2,
+      value: 2,
+    },
+    {
+      label: 3,
+      value: 3,
+    },
+    {
+      label: 4,
+      value: 4,
+    },
+    {
+      label: 5,
+      value: 5,
+    },
+  ];
   componentDidMount() {
-    axios.get("http://localhost:4000/orders/consumer/1").then((res) => {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+    this.setState({ userid: userid });
+    axios.get("http://localhost:4000/orders/consumer/" + userid).then((res) => {
       this.setState({ order: res.data });
-      console.log(res.data.order);
     });
   }
+  handleRatingChange(orderId, rating) {
+    var userid = this.state.userid;
+
+    axios
+      .post("http://localhost:4000/orders/consumer/rating", {
+        userid: userid,
+        orderId: orderId,
+        rating: rating,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  }
+  feedbackChangeHandler = (e) => {
+    var val = e.target.value;
+    this.setState({ newfeedback: val });
+  };
+  feedbackPostHandler = (orderid) => {
+    var userid = this.state.userid;
+    var newfeedback = this.state.newfeedback;
+    axios
+      .post("http://localhost:4000/orders/consumer/feedback", {
+        userid: userid,
+        newfeedback: newfeedback,
+        orderid: orderid,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
   orders = () => {
     return <h1>No Orders</h1>;
   };
@@ -109,9 +153,50 @@ class Orders extends Component {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              <OrderRating productId="" userId="" />
-            </Typography>
+            <div style={{ width: 300 }}>
+              <Typography id="discrete-slider-small-steps" gutterBottom>
+                Ratings
+              </Typography>
+              <Slider
+                defaultValue={items.rating}
+                ariaValueText={this.ratingsMarks.value}
+                aria-labelledby="discrete-slider-custom"
+                step={1}
+                marks
+                min={0}
+                max={5}
+                name={this.ratingsMarks.value}
+                type="number"
+                valueLabelDisplay="auto"
+                // eslint-disable-next-line react/jsx-no-duplicate-props
+                marks={this.ratingsMarks}
+                onChange={(e, newValue) => {
+                  this.setState({});
+                  this.handleRatingChange(items.orderId, newValue);
+                }}
+              />
+            </div>
+            <div style={{ width: 800, marginLeft: 20 }}>
+              <div class="form-group mx-5 px-5">
+                <label for="exampleFormControlTextarea1">Your Feedback</label>
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  onChange={this.feedbackChangeHandler}
+                ></textarea>
+                <button
+                  disabled={this.state.newfeedback.length > 0 ? false : true}
+                  className="btn btn-info px-5 mt-3"
+                  onClick={() => {
+                    this.feedbackPostHandler(items.orderId);
+                  }}
+                >
+                  {" "}
+                  Save
+                </button>
+              </div>
+            </div>
           </AccordionDetails>
         </Accordion>
       ));

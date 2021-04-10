@@ -13,9 +13,13 @@ class Profile extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:4000/profile/userinfo").then((res) => {
-      this.setState({ res: res.data });
-    });
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+
+    axios
+      .get("http://localhost:4000/profile/userinfo/" + userid)
+      .then((res) => {
+        this.setState({ res: res.data });
+      });
     // fetch("http://localhost:4000/profile/userinfo")
     //   .then((res) => (res = res.json()))
     //   .then((res) => {

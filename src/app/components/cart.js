@@ -5,7 +5,7 @@ import Navfooter from "./footer";
 import { Link, Redirect } from "react-router-dom";
 import FooterBar from "./FooterBar";
 import "../Styles/cart.css";
-import AuthenticationService from "../services/AuthenticationService";
+
 function Header(props) {
   const itemCount = props.products.reduce((quantity, product) => {
     return quantity + +product.quantity;
@@ -135,15 +135,16 @@ class cart extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:4000/cart/showProducts").then((res) => {
-      this.setState({
-        products: res.data.products,
-        promotions: res.data.promotions,
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+    this.setState({ user: userid });
+    axios
+      .get("http://localhost:4000/cart/showProducts/" + userid)
+      .then((res) => {
+        this.setState({
+          products: res.data.products,
+          promotions: res.data.promotions,
+        });
       });
-    });
-    axios.get("http://localhost:4000/home/loginInfo").then((res) => {
-      this.setState({ user: res.data.userid });
-    });
   }
   onChangeProductQuantity = (index, event) => {
     const products = this.state.products;

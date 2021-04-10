@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import AuthenticationService from "../services/AuthenticationService";
 import {
   Dropdown,
   DropdownToggle,
@@ -13,11 +12,10 @@ const NavSignUp = (props) => {
   const [login, setLogin] = useState("guest");
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   // const [user, setUser] = useState({ props });
-
-  axios.get("http://localhost:4000/home/loginInfo").then((res) => {
-    setLogin(res.data.email);
+  useEffect(() => {
+    var username = JSON.parse(localStorage.getItem("user")).username;
+    setLogin(username);
   });
-
   return (
     <div className="mr-5">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">

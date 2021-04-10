@@ -10,11 +10,10 @@ import FeaturedProductCatalog from "./homeComponents/FeaturedProductCatalog";
 import FooterBar from "./FooterBar";
 import Navfooter from "./footer";
 import "../Styles/Home.css";
-//import AuthenticationService from "../services/AuthenticationService";
+
 class Home extends Component {
   constructor(props) {
     super(props);
-    //const user = AuthenticationService.getCurrentUser();
     this.state = {
       login: {},
       itemCatalog: [],
@@ -23,20 +22,23 @@ class Home extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:4000/home/loginInfo").then((res) => {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+    axios.get("http://localhost:4000/home/loginInfo/" + userid).then((res) => {
       this.setState({ login: res.data });
       //console.log("loginInfo", res.data);
     });
 
-    axios.get("http://localhost:4000/home/coupon").then((res) => {
+    axios.get("http://localhost:4000/home/coupon/" + userid).then((res) => {
       this.setState({ coupons: res.data });
       //console.log("coupon", res.data);
     });
 
-    axios.get("http://localhost:4000/home/itemCatalog").then((res) => {
-      this.setState({ itemCatalog: res.data });
-      //console.log("itemCatalog", res.data);
-    });
+    axios
+      .get("http://localhost:4000/home/itemCatalog/" + userid)
+      .then((res) => {
+        this.setState({ itemCatalog: res.data });
+        //console.log("itemCatalog", res.data);
+      });
     // axios
     //   .get("http://localhost:4000/home/featuredProductCatalog")
     //   .then((res) => {

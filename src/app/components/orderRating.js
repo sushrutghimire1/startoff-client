@@ -87,6 +87,14 @@ class orderRating extends Component {
       rated: i,
     });
   }
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+  componentDidMount() {
+    if (this.props.rating > 0) {
+      this.handleClick(this.props.rating);
+    }
+  }
 
   handleRating(rating) {
     return <Rating rating={this.state.rated} />;
