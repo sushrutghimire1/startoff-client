@@ -306,120 +306,140 @@ Userorderslist = [
 
 
 productsData = [
-   {
-      "userId":1,
-      "order":[
-         {
-            "orderId":1,
-            "productId":1,
-            "productName":"product1",
-            "image":"img1.jpg",
-            "quantity":1,
-            "seller":"seller1",
-            "total":100,
-            "status":"delivered",
-            "statusDate":"10/11/2021",
-            "rating":3,
-            "feedback":""
-         },
-         {
-            "orderId":2,
-            "productId":2,
-            "productName":"product2",
-            "image":"img2.jpg",
-            "quantity":2,
-            "seller":"seller2",
-            "total":200,
-            "status":"shipping",
-            "statusDate":"08/11/2021",
-            "rating":0,
-            "feedback":""
-         },
-         {
-            "orderId":3,
-            "productId":3,
-            "productName":"product3",
-            "image":"img3.jpg",
-            "quantity":3,
-            "seller":"seller3",
-            "total":300,
-            "status":"ordered",
-            "statusDate":"03/11/2021",
-            "rating":0,
-            "feedback":""
-         },
-         {
-            "orderId":4,
-            "productId":4,
-            "productName":"product4",
-            "image":"img4.jpg",
-            "quantity":4,
-            "seller":"seller4",
-            "total":400,
-            "status":"canceled",
-            "statusDate":"03/11/2021",
-            "rating":0,
-            "feedback":""
-         }
-      ]
-   },
-   {
-      "userId":2,
-      "order":[
-         {
-            "orderId":1,
-            "productId":1,
-            "productName":"product1",
-            "image":"img1.jpg",
-            "quantity":1,
-            "seller":"seller1",
-            "total":100,
-            "status":"delivered",
-            "statusDate":"10/11/2021",
-            "rating":0,
-            "feedback":""
-         },
-         {
-            "orderId":2,
-            "productId":2,
-            "productName":"product2",
-            "image":"img2.jpg",
-            "quantity":2,
-            "seller":"seller2",
-            "total":200,
-            "status":"shipping",
-            "statusDate":"08/11/2021",
-            "rating":0,
-            "feedback":""
-         },
-         {
-            "orderId":3,
-            "productId":3,
-            "productName":"product3",
-            "image":"img3.jpg",
-            "quantity":3,
-            "seller":"seller3",
-            "total":300,
-            "status":"ordered",
-            "statusDate":"03/11/2021",
-            "rating":0,
-            "feedback":""
-         },
-         {
-            "orderId":4,
-            "productId":4,
-            "productName":"product4",
-            "image":"img4.jpg",
-            "quantity":4,
-            "seller":"seller4",
-            "total":400,
-            "status":"canceled",
-            "statusDate":"03/11/2021",
-            "rating":0,
-            "feedback":""
-         }
-      ]
-   }
+  {
+    productId: 1,
+    productName: "product1",
+    image: "img1.jpg",
+    desp: "description of product",
+    price: 100,
+    sellerName: "seller1",
+    sellerId: "1",
+    sellerContact: "9841023456",
+    stock: 100,
+    rating: 5,
+    reviews: [
+      {
+        reviewid: 1,
+        userid: 1,
+        username: "user",
+        userimg: "img1.jpg",
+        rating: 7.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+      {
+        reviewid: 2,
+        userid: 2,
+        username: "user2",
+        userimg: "img1.jpg",
+        rating: 3.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+    ],
+    offers: [
+      {
+        offerid: 1,
+        offerDetails: "discount on this product now",
+        expDate: "11/12/2025",
+      },
+      {
+        offerid: 2,
+        offerDetails: "this service available",
+        expDate: "11/12/2025",
+      },
+    ],
+  },
+  {
+    productId: 2,
+    productName: "product2",
+    image: "img1.jpg",
+    desp: "description of product",
+    price: 200,
+    sellerName: "seller1",
+    sellerId: "1",
+    sellerContact: "9841023456",
+    stock: 100,
+    rating: 5,
+    reviews: [
+      {
+        reviewid: 1,
+        userid: 1,
+        username: "user",
+        userimg: "img1.jpg",
+        rating: 7.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+      {
+        reviewid: 2,
+        userid: 2,
+        username: "user2",
+        userimg: "img1.jpg",
+        rating: 3.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+    ],
+    offers: [
+      {
+        offerid: 1,
+        offerDetails: "discount on this product now",
+        expDate: "11/12/2025",
+      },
+      {
+        offerid: 2,
+        offerDetails: "this service available",
+        expDate: "11/12/2025",
+      },
+    ],
+  },
+  {
+    productId: 3,
+    productName: "product3",
+    image: "img1.jpg",
+    desp: "description of product",
+    price: 300,
+    sellerName: "seller1",
+    sellerId: "1",
+    sellerContact: "9841023456",
+    stock: 100,
+    rating: 5,
+    //instead of review table, this shows review of products.
+    reviews: [
+      {
+        reviewid: 1,
+        userid: 1,
+        username: "user",
+        userimg: "img1.jpg",
+        rating: 7.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+      {
+        reviewid: 2,
+        userid: 2,
+        username: "user2",
+        userimg: "img1.jpg",
+        rating: 3.6,
+        reviewDesp: "something something",
+        reviewDate: "11/12/2021",
+      },
+    ],
+    //There is no use of offers till now. Can be used in future development
+    offers: [
+      {
+        offerid: 1,
+        offerDetails: "discount on this product now",
+        expDate: "11/12/2025",
+      },
+      {
+        offerid: 2,
+        offerDetails: "this service available",
+        expDate: "11/12/2025",
+      },
+    ],
+  },
 ]
 
 
@@ -438,6 +458,9 @@ userinfo = [
    }
 ]
 
+
+
+//Seperate review table can be formed, cannot be formed, choice.
 reviews = [
    {
       "reviewid":1,
