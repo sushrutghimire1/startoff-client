@@ -7,3 +7,5 @@ React + Express RESTAPI: https://www.youtube.com/watch?v=fnpmR6Q5lEc
 
 Collaborative Filtering: towardsdatascience.com/intro-to-recommender-system-collaborative-filtering-64a238194a26
 Collaborative Filtering npm package: https://www.npmjs.com/package/collaborative-filter
+Time Series Analysis and foreCasting : https://www.npmjs.com/package/timeseries-analysis
+Benifit Cost Analysis
