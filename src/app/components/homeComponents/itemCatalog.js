@@ -8,6 +8,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import "../../Styles/itemCatalog.css";
+import axios from "axios";
 
 const ItemCatalog = (props) => {
   const [open, setOpen] = useState(false);
@@ -20,12 +21,27 @@ const ItemCatalog = (props) => {
     setOpen(false);
   };
   const handleAddCart = (e) => {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
     const itemValue = {
-      id: e.id,
-      title: e.title,
+      productid: e.productId,
+      productName: e.productName,
       price: e.price,
-      discount: e.discount,
+      userid: userid,
+      seller: e.sellerId,
+      desp: e.desp,
     };
+    axios
+      .post("http://localhost:4000/cart/addToCart", {
+        productid: e.productId,
+        productName: e.productName,
+        price: e.price,
+        userid: userid,
+        seller: e.sellerId,
+        desp: e.desp,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
     addCart([...cart, itemValue]);
   };
   useEffect(() => {
@@ -45,25 +61,16 @@ const ItemCatalog = (props) => {
           </center>
         </div>
         {item.map((item, index) => (
-          <div className="col-lg-3" key={item.id}>
+          <div className="col-lg-3" key={item.productId}>
             <div className="card product-card mx-auto">
               <div className="card-header text-center">
-                <h1 className="product-title">{item.title}</h1>
+                <h1 className="product-title">{item.productName}</h1>
                 <div className="row px-0 mt-3 text-center">
-                  <div className="col-4 px-0">
-                    <strike className="price-strike">
-                      Rs{" "}
-                      {(
-                        item.price +
-                        (item.price * item.discount) / 100
-                      ).toFixed(2)}
-                    </strike>
-                  </div>
                   <div className="col-4 px-0">
                     <p className="price">Rs {item.price}</p>
                   </div>
                   <div className="col-4 px-0">
-                    <p className="rating">{item.discount}%</p>
+                    {/* <p className="rating">{item.discount}%</p> */}
                   </div>
                 </div>
               </div>
@@ -76,7 +83,7 @@ const ItemCatalog = (props) => {
 
                 <div className="row px-0 mt-3 text-center">
                   <div className="col-6 px-0">
-                    <p className="sold-amount">{item.soldno} sold</p>
+                    <p className="sold-amount">{item.stock} Products left</p>
                   </div>
                   <div className="col-6 px-0">
                     <div className="product-details-link">
@@ -95,7 +102,11 @@ const ItemCatalog = (props) => {
                           <DialogContentText id="alert-dialog-description">
                             product description is mentioned here {item.desp}
                             <br />
-                            {item.merchant}
+                            <strong>Seller Details:</strong>
+                            <br />
+                            {item.sellerName}
+                            <br />
+                            {item.sellerContact}
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>

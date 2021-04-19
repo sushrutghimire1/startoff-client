@@ -78,7 +78,7 @@ class Search extends Component {
                   </div>
                   <div className="col-md-3">
                     <div className="d-flex pr-3">
-                      <table class="table table-hover">
+                      <table className="table table-hover">
                         <tbody>
                           <tr>
                             <th scope="row">Name</th>

@@ -19,6 +19,7 @@ class Home extends Component {
       itemCatalog: [],
       coupons: [],
       featuredProductCatalog: [],
+      recommended: [],
     };
   }
   componentDidMount() {
@@ -39,6 +40,11 @@ class Home extends Component {
         this.setState({ itemCatalog: res.data });
         //console.log("itemCatalog", res.data);
       });
+
+    axios.get("http://localhost:4000/CF_temp/" + userid).then((res) => {
+      this.setState({ recommended: res.data });
+      console.log("recommended", res.data);
+    });
     // axios
     //   .get("http://localhost:4000/home/featuredProductCatalog")
     //   .then((res) => {
@@ -54,7 +60,7 @@ class Home extends Component {
         <Navbar login={this.state.login} />
         <Carousel />
         <Container fluid>
-          <ItemCatalog item={this.state.itemCatalog} />
+          <ItemCatalog item={this.state.recommended} />
           <Coupons coupon={this.state.coupons} />
           <FeaturedProductCatalog item={this.state.featuredProductCatalog} />
         </Container>

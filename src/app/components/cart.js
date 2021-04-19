@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Route, withRouter } from "react-router-dom";
 import Navbar from "./Navbar";
 import Navfooter from "./footer";
 import { Link, Redirect } from "react-router-dom";
@@ -84,6 +85,25 @@ function Summary(props) {
   const tax = props.tax;
   const total = subTotal - discount + tax;
 
+  const handleBuy = (e) => {
+    var userid = JSON.parse(localStorage.getItem("user")).userid;
+    console.log({ product: props.products, userid: userid, total: total });
+    axios
+      .post("http://localhost:4000/payment/checkout", {
+        userid: userid,
+        product: props.products,
+        total: total,
+      })
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data + " checked out");
+          console.log(
+            "Error in props.history.push('/home'). May be beacuse of nested child of a component. tried using Router as well."
+          );
+          props.history.push("/home");
+        }
+      });
+  };
   return (
     <section className="container" style={{ overflow: "hidden" }}>
       <div className="mx-5 px-5 promotion">
@@ -112,14 +132,19 @@ function Summary(props) {
       </div>
 
       <div className="checkout">
-        <button type="button" onClick={console.log("check out")}>
+        <button type="button" onClick={handleBuy}>
           Check Out
         </button>
       </div>
     </section>
   );
 }
-
+function formatCurrency(value) {
+  return Number(value).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+}
 class cart extends Component {
   constructor(props) {
     super(props);
@@ -161,6 +186,15 @@ class cart extends Component {
     this.setState({ products });
   };
   onRemoveProduct = (i) => {
+    console.log(this.state.products[i]);
+    axios
+      .post("http://localhost:4000/cart/deleteProducts/", {
+        userid: this.state.user,
+        productId: this.state.products[i].productId,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
     const products = this.state.products.filter((product, index) => {
       return index !== i;
     });
@@ -217,7 +251,7 @@ class cart extends Component {
               <h3>There are no products in your cart.</h3>
               <button
                 onClick={() => {
-                  this.props.history.push("/Home/Consumer");
+                  this.props.history.push("/home");
                 }}
               >
                 Shopping now
@@ -232,11 +266,4 @@ class cart extends Component {
   }
 }
 
-function formatCurrency(value) {
-  return Number(value).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-}
-
-export default cart;
+export default withRouter(cart);

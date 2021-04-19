@@ -177,10 +177,10 @@ class Orders extends Component {
               />
             </div>
             <div style={{ width: 800, marginLeft: 20 }}>
-              <div class="form-group mx-5 px-5">
+              <div className="form-group mx-5 px-5">
                 <label for="exampleFormControlTextarea1">Your Feedback</label>
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   onChange={this.feedbackChangeHandler}

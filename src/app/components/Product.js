@@ -41,7 +41,7 @@ class Product extends Component {
                 <div className="productImage p-2">
                   <img
                     src={this.state.product.image}
-                    class="img-fluid rounded mx-auto d-block"
+                    className="img-fluid rounded mx-auto d-block"
                     alt="ProductImage"
                   />
                 </div>
@@ -58,7 +58,10 @@ class Product extends Component {
                     label={this.state.product.rating}
                     className="px-3 mr-2"
                   />{" "}
-                  {this.state.product.reviews.length} ratings
+                  {this.state.product.reviews
+                    ? this.state.product.reviews.length
+                    : 0}{" "}
+                  ratings
                 </div>
                 <div className="d-flex mb-3">
                   <h5>
@@ -84,12 +87,16 @@ class Product extends Component {
                 <div className="d-flex mb-3">
                   <br />
                   <ul>
-                    {this.state.product.offers.map((offer, index) => (
-                      <li>
-                        <strong>{offer.expDate}</strong>-:{" "}
-                        <em>{offer.offerDetails}</em>
-                      </li>
-                    ))}
+                    {this.state.product ? (
+                      this.state.product.offers.map((offer, index) => (
+                        <li>
+                          <strong>{offer.expDate}</strong>-:{" "}
+                          <em>{offer.offerDetails}</em>
+                        </li>
+                      ))
+                    ) : (
+                      <p>No offers</p>
+                    )}
                   </ul>
                 </div>
                 <Paper
@@ -123,7 +130,7 @@ class Product extends Component {
                     </strong>
                   </div>
                   <div className="d-flex w-50 table-responsive">
-                    <table class="table table-hover">
+                    <table className="table table-hover">
                       <tbody>
                         <tr>
                           <th scope="row">Name</th>
@@ -149,29 +156,36 @@ class Product extends Component {
                       <h2 style={{ color: "rgb(255, 64, 0)" }}>Reviews</h2>
                     </strong>
                   </div>
-                  {this.state.product.reviews.map((review, index) => (
-                    <div class="codepen-wrapper">
-                      <figure class="review">
-                        <blockquote class="review__text">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Fuga doloremque architecto dicta animi, totam,
-                          itaque officia ex.
-                        </blockquote>
-                        <figcaption class="review__person">
-                          <img
-                            src="http://alexsommers.com/codepen/user-6.jpg"
-                            alt="User 1"
-                            class="review__photo"
-                          />
-                          <div class="review__info">
-                            <p class="review__info--name">Nikki Smith</p>
-                            <p class="review__info--date"> April 26, 2020</p>
-                          </div>
-                          <div class="review__rating">7.8</div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  ))}
+                  {this.state.product ? (
+                    this.state.product.reviews.map((review, index) => (
+                      <div className="codepen-wrapper">
+                        <figure className="review">
+                          <blockquote className="review__text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Fuga doloremque architecto dicta animi, totam,
+                            itaque officia ex.
+                          </blockquote>
+                          <figcaption className="review__person">
+                            <img
+                              src="http://alexsommers.com/codepen/user-6.jpg"
+                              alt="User 1"
+                              className="review__photo"
+                            />
+                            <div className="review__info">
+                              <p className="review__info--name">Nikki Smith</p>
+                              <p className="review__info--date">
+                                {" "}
+                                April 26, 2020
+                              </p>
+                            </div>
+                            <div className="review__rating">7.8</div>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No reviews</p>
+                  )}
                 </Paper>
               </div>
             </div>

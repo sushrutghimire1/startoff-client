@@ -24,23 +24,23 @@ class Feedback extends Component {
           </strong>
         </div>
         {this.state.product.reviews.map((review, index) => (
-          <div class="codepen-wrapper">
-            <figure class="review">
-              <blockquote class="review__text">
+          <div className="codepen-wrapper">
+            <figure className="review">
+              <blockquote className="review__text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
                 doloremque architecto dicta animi, totam, itaque officia ex.
               </blockquote>
-              <figcaption class="review__person">
+              <figcaption className="review__person">
                 <img
                   src="http://alexsommers.com/codepen/user-6.jpg"
                   alt="User 1"
-                  class="review__photo"
+                  className="review__photo"
                 />
-                <div class="review__info">
-                  <p class="review__info--name">Nikki Smith</p>
-                  <p class="review__info--date"> April 26, 2020</p>
+                <div className="review__info">
+                  <p className="review__info--name">Nikki Smith</p>
+                  <p className="review__info--date"> April 26, 2020</p>
                 </div>
-                <div class="review__rating">7.8</div>
+                <div className="review__rating">7.8</div>
               </figcaption>
             </figure>
           </div>
