@@ -9,3 +9,5 @@ Collaborative Filtering: towardsdatascience.com/intro-to-recommender-system-coll
 Collaborative Filtering npm package: https://www.npmjs.com/package/collaborative-filter
 Time Series Analysis and foreCasting : https://www.npmjs.com/package/timeseries-analysis
 Benifit Cost Analysis
+
+Stock Market data: https://www.npmjs.com/package/alphavantage
